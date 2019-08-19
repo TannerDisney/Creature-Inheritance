@@ -14,6 +14,7 @@ namespace InheritenceSample
             p1.Attack = 100;
             p1.Health = 25.5;
             p1.Stamina = 15.5;
+            p1.Race = "Elf";
 
             Item potion = new Item()
             {
@@ -41,10 +42,22 @@ namespace InheritenceSample
             Creature c = new Player("Zelda");
             // How can we set stamina when we know the creature is a player
             //c.Stamina = 5;
+            c.Race = "Human";
 
-            DisplayCreature(p1);
-            DisplayCreature(e1);
-            DisplayCreature(c);
+            /*
+                DisplayCreature(p1);
+                DisplayCreature(e1);
+                DisplayCreature(c);
+            */
+            List<Creature> allCreatures = new List<Creature>()
+            {
+                p1, e1, c
+            };
+
+            foreach (Creature entity in allCreatures)
+            {
+                DisplayCreature(entity);
+            }   
 
             Console.ReadKey();
             
@@ -55,12 +68,12 @@ namespace InheritenceSample
             if (c is Enemy)
             {
                 Enemy currEnemy = c as Enemy;
-                Console.WriteLine(currEnemy.EnemyId);
-                Console.WriteLine("Hidden Stats...");
+                Console.WriteLine("Enemy: " + currEnemy.Name);
+                Console.WriteLine("Hidden Stats...\n");
             }
             else
             {
-                Console.WriteLine(c.GetDisplayText("\n"));
+                Console.WriteLine(c.GetDisplayText("\n") + "\n");
             }
         }
     }

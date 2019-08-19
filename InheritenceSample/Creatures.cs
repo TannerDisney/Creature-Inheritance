@@ -10,7 +10,7 @@ namespace InheritenceSample
     /// <summary>
     /// A base class to represent human and AI controlled characters
     /// </summary>
-    class Creature
+    abstract class Creature
     {
 
         public Creature(string name)
@@ -53,6 +53,8 @@ namespace InheritenceSample
         {
             return $"{Name}{sep}{Health}{sep}{Race}";
         }
+
+        public abstract string Speak();
     }
 
     /// <summary>
@@ -76,6 +78,11 @@ namespace InheritenceSample
         {
             return "Player: " + base.GetDisplayText(sep) + sep + Stamina;
         }
+
+        public override string Speak()
+        {
+            return $"Hey, my name is {Name}";
+        }
     }
 
     /// <summary>
@@ -85,7 +92,9 @@ namespace InheritenceSample
     class Enemy : Creature
     {
         public Enemy(string enemyName) : base(enemyName)
-        { }
+        {
+            ItemDrops = new List<Item>();
+        }
 
         /// <summary>
         /// The Id of the enemy
@@ -108,5 +117,10 @@ namespace InheritenceSample
         /// Items the enemy may be able to drop on being defeated
         /// </summary>
         public List<Item> ItemDrops { get; set; }
+
+        public override string Speak()
+        {
+            return "WAAAAARRRRRRGGGGGG";
+        }
     }
 }
